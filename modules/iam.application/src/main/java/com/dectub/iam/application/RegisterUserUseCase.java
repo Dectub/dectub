@@ -18,7 +18,7 @@ public class RegisterUserUseCase {
     private final UserRepository userRepository;
     private final SecurityPasswordHandler securityPasswordHandler;
 
-    private static final String BLOCKED = "blocked";
+    private static final String BLOCKED = "new";
 
     public RegisterUserUseCase(UserRepository userRepository, SecurityPasswordHandler securityPasswordHandler) {
         this.userRepository = userRepository;

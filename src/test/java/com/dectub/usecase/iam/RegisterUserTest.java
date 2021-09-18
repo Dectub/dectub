@@ -36,7 +36,7 @@ public class RegisterUserTest extends IntegrationTest {
         assertThat(handler.verify("1234", user.password())).isTrue();
         assertThat(user.roleIds()).contains(491997312445317120L);
         assertThat(user.roleIds()).contains(491997312445317121L);
-        assertThat(user.state()).isEqualTo("blocked");
+        assertThat(user.state()).isEqualTo("new");
     }
 
     @AfterEach
