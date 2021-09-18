@@ -1,0 +1,5 @@
+dependencies {
+    implementation project(":iam.domain")
+    implementation project(":domain.core")
+    implementation project(":application.core")
+}

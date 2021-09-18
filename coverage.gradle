@@ -1,3 +1,4 @@
 project.coverage.excludes = [
-    'com/dectub/Application.class'
+    'com/dectub/Application.class',
+    'com/dectub/iam/gateways/persistence/Q*'
 ]
