@@ -1,4 +1,4 @@
-package com.dechub.frameworks.domain.core;
+package com.dectub.frameworks.domain.core;
 
 import org.junit.jupiter.api.Test;
 

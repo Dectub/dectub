@@ -1,4 +1,4 @@
-package com.dechub.basic.domain;
+package com.dectub.basic.application;
 
 import org.junit.jupiter.api.Test;
 

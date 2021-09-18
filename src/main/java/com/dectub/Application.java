@@ -1,4 +1,4 @@
-package com.dechub;
+package com.dectub;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

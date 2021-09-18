@@ -1,4 +1,4 @@
-rootProject.name = 'dechub'
+rootProject.name = 'dectub'
 
 file("modules").eachDir {
     include it.name

@@ -1,4 +1,4 @@
-package com.dechub.basic.gateways;
+package com.dectub.basic.gateways;
 
 import org.junit.jupiter.api.Test;
 
