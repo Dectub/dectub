@@ -1,0 +1,16 @@
+String getDockerImageName() {
+    return "registry.cn-zhangjiakou.aliyuncs.com/highsoft/${rootProject.name}.${project.name}:latest"
+}
+
+task buildDockerImage(type: Exec, group: 'build') {
+    commandLine = ['docker', 'build', '-t', getDockerImageName(), project.projectDir.path]
+}
+
+task pushDockerImage(type: Exec, group: 'build') {
+    dependsOn(buildDockerImage)
+    commandLine = ['docker', 'push', getDockerImageName()]
+}
+
+task push(group: "build") {
+    dependsOn(pushDockerImage)
+}

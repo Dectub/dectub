@@ -1,0 +1,50 @@
+plugins {
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
+    id 'idea'
+}
+
+allprojects {
+    if (subprojects.size() > 0 && name != rootProject.name) return
+    if (name == "documents" || projectDir.parentFile.name == "frontends") return
+
+    version '1.0.0'
+
+    apply from: "$rootDir/gradle/config/scripts/java.gradle"
+    apply from: "$rootDir/gradle/config/scripts/junit.gradle"
+    apply from: "$rootDir/gradle/config/scripts/style.gradle"
+    apply from: "$rootDir/gradle/config/scripts/coverage.gradle"
+
+    dependencies {
+        implementation "com.google.guava:guava:$guavaVersion"
+        implementation "org.apache.commons:commons-lang3:$commonsLang3Version"
+    }
+
+    test.dependsOn(checkstyleMain)
+}
+
+subprojects {
+    apply plugin: 'java-library'
+}
+
+dependencies {
+    implementation project(":users.gateways")
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("com.h2database:h2:$h2Version")
+    implementation("org.flywaydb:flyway-core:$flywaydbVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+apply from: "$rootDir/gradle/config/scripts/coverage-all.gradle"
+apply from: "./coverage.gradle"
+
+apply from: "$rootDir/gradle/config/scripts/jib.gradle"
+
+task initGit(type: Exec) {
+    commandLine 'sh', "./scripts/setup-git.sh"
+}
+check.dependsOn(initGit)

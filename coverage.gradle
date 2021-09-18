@@ -1,0 +1,3 @@
+project.coverage.excludes = [
+    'com/example/scaffold/Application.class'
+]

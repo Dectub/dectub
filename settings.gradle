@@ -1,0 +1,16 @@
+rootProject.name = 'dechub'
+
+file("modules").eachDir {
+    include it.name
+    project(":${it.name}").projectDir = it
+}
+
+file("frameworks").eachDir {
+    include it.name
+    project(":${it.name}").projectDir = it
+}
+
+file("frontends").eachDir {
+    include it.name
+    project(":${it.name}").projectDir = it
+}

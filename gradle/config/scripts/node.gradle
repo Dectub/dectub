@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.node-gradle:gradle-node-plugin:$nodePluginVersion"
+    }
+}
+
+apply plugin: com.moowork.gradle.node.NodePlugin
+
+npmInstall {
+    args = ['--registry=https://registry.npm.taobao.org']
+}
+
+
+task npmRunTest(type: NpmTask, group: 'verification') {
+    args = ['run', 'test']
+}
+
+task npmWatchTest(type: NpmTask, group: 'verification') {
+    args = ['run', 'watch']
+}
+
+task npmRunBuild(type: NpmTask, group: 'build') {
+    args = ['run', 'build']
+}
+
+test.dependsOn(tasks.getByName('npmRunTest'))
+build.dependsOn(tasks.getByName('npmRunBuild'))

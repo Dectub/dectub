@@ -1,0 +1,4 @@
+apply from: "$rootDir/gradle/config/scripts/node.gradle"
+apply from: "$rootDir/gradle/config/scripts/docker.gradle"
+
+buildDockerImage.dependsOn(tasks.getByName('npmRunBuild'))

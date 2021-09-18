@@ -1,0 +1,28 @@
+# Version 0.1
+
+# Gradle project-specific cache directory
+.gradle
+
+# Gradle build output directory
+build
+
+# IDEA project-specific files
+*.ipr
+*.iws
+*.iml
+
+# IDEA
+**/.idea/*
+!**/.idea/codeStyles/
+!**/.idea/dictionaries/
+!**/.idea/runConfigurations/
+
+# node
+**/dist/
+**/node_modules/
+**/package-lock.json
+documents/_book/
+
+# out
+out/
+/.ideaDataSources/84836c46-08f9-40c4-8d44-f2e670b765dd.xml

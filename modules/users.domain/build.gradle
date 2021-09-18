@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(":domain.core")
+    implementation 'junit:junit:4.12'
+}

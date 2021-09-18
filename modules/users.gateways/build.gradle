@@ -1,0 +1,7 @@
+dependencies {
+    api(project(":users.domain"))
+    api(project(":users.application"))
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+}
