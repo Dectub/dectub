@@ -15,7 +15,7 @@ public class User extends BasicDomain {
     private final String name;
     private final String email;
     private Set<Long> roleIds;
-    private final String state;
+    private String state;
     private final String password;
 
     public User(long id, String name, String email, Set<Long> roleIds, String state, String password,
@@ -37,6 +37,10 @@ public class User extends BasicDomain {
         this.email = email;
         this.state = state;
         this.password = password;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public void resetRoleIds(Set<Long> roleIds) {

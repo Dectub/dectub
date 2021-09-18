@@ -3,6 +3,7 @@ package com.dectub.usecase.iam;
 import com.dectub.IntegrationTest;
 import com.dectub.TestResponse;
 import com.dectub.iam.domain.SecurityPasswordHandler;
+import com.dectub.iam.domain.SystemRepository;
 import com.dectub.iam.domain.User;
 import com.dectub.iam.domain.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -26,8 +27,12 @@ public class RegisterUserTest extends IntegrationTest {
     private @Resource
     SecurityPasswordHandler handler;
 
+    private @Resource
+    SystemRepository systemRepository;
+
     @Test
-    void should_register_user_correctly() {
+    void should_register_user_correctly_when_no_email_config() {
+        systemRepository.save("register.email", "off");
         TestResponse response = post("/account/register", ImmutableMap.of("name", "test1", "email", "wangweili457@gmail.com", "roleIds", Set.of(491997312445317120L, 491997312445317121L), "password", "1234"));
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED);
         User user = userRepository.userForEmail("wangweili457@gmail.com");
@@ -36,7 +41,21 @@ public class RegisterUserTest extends IntegrationTest {
         assertThat(handler.verify("1234", user.password())).isTrue();
         assertThat(user.roleIds()).contains(491997312445317120L);
         assertThat(user.roleIds()).contains(491997312445317121L);
-        assertThat(user.state()).isEqualTo("new");
+        assertThat(user.state()).isEqualTo("active");
+    }
+
+    @Test
+    void should_register_user_correctly_when_have_email_config() {
+        systemRepository.save("register.email", "on");
+        TestResponse response = post("/account/register", ImmutableMap.of("name", "test1", "email", "wangweili457@gmail.com", "roleIds", Set.of(491997312445317120L, 491997312445317121L), "password", "1234"));
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED);
+        User user = userRepository.userForEmail("wangweili457@gmail.com");
+        assertThat(user.name()).isEqualTo("test1");
+        assertThat(user.email()).isEqualTo("wangweili457@gmail.com");
+        assertThat(handler.verify("1234", user.password())).isTrue();
+        assertThat(user.roleIds()).contains(491997312445317120L);
+        assertThat(user.roleIds()).contains(491997312445317121L);
+        assertThat(user.state()).isEqualTo("active");
     }
 
     @AfterEach

@@ -2,9 +2,7 @@ package com.dectub.iam.application;
 
 import com.dectub.frameworks.application.core.UseCase;
 import com.dectub.frameworks.domain.core.GlobalIdentityService;
-import com.dectub.iam.domain.SecurityPasswordHandler;
-import com.dectub.iam.domain.User;
-import com.dectub.iam.domain.UserRepository;
+import com.dectub.iam.domain.*;
 
 import java.time.Instant;
 
@@ -17,16 +15,20 @@ import java.time.Instant;
 public class RegisterUserUseCase {
     private final UserRepository userRepository;
     private final SecurityPasswordHandler securityPasswordHandler;
+    private final NewUserEmailConfirmFactory newUserEmailConfirmFactory;
 
     private static final String BLOCKED = "new";
 
-    public RegisterUserUseCase(UserRepository userRepository, SecurityPasswordHandler securityPasswordHandler) {
+    public RegisterUserUseCase(UserRepository userRepository, SecurityPasswordHandler securityPasswordHandler,
+                               NewUserEmailConfirmFactory newUserEmailConfirmFactory) {
         this.userRepository = userRepository;
         this.securityPasswordHandler = securityPasswordHandler;
+        this.newUserEmailConfirmFactory = newUserEmailConfirmFactory;
     }
 
     public void execute(UserInput userInput) {
         User user = userRepository.save(registerUser(userInput));
+        newUserEmailConfirmFactory.create().sendEmail(user);
     }
 
     private User registerUser(UserInput userInput) {
