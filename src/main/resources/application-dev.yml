@@ -1,0 +1,8 @@
+spring:
+  redis:
+    port: 22050
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:22040/dectub
+    username: postgres
+    password: 1234
