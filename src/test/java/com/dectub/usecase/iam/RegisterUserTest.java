@@ -2,6 +2,7 @@ package com.dectub.usecase.iam;
 
 import com.dectub.IntegrationTest;
 import com.dectub.TestResponse;
+import com.dectub.frameworks.domain.core.SystemConfig;
 import com.dectub.iam.domain.SecurityPasswordHandler;
 import com.dectub.iam.domain.SystemRepository;
 import com.dectub.iam.domain.User;
@@ -46,7 +47,12 @@ public class RegisterUserTest extends IntegrationTest {
 
     @Test
     void should_register_user_correctly_when_have_email_config() {
-        systemRepository.save("register.email", "on");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL, "on");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL_HOST, "smtp.gmail.com");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL_PORT, "465");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL_USERNAME, "wangweili457@gmail.com");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL_PASSWORD, "aAN-J_srGbmNt.gwF2JQ");
+        systemRepository.save(SystemConfig.REGISTER_EMAIL_DEFAULT_ENCODING, "UTF-8");
         TestResponse response = post("/account/register", ImmutableMap.of("name", "test1", "email", "wangweili457@gmail.com", "roleIds", Set.of(491997312445317120L, 491997312445317121L), "password", "1234"));
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED);
         User user = userRepository.userForEmail("wangweili457@gmail.com");

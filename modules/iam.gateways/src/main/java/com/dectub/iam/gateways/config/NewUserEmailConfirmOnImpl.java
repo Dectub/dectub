@@ -1,6 +1,7 @@
 package com.dectub.iam.gateways.config;
 
 import com.dectub.iam.domain.NewUserEmailConfirm;
+import com.dectub.iam.domain.SendRegisterEmailService;
 import com.dectub.iam.domain.User;
 import com.dectub.iam.domain.UserRepository;
 import org.springframework.stereotype.Component;
@@ -14,14 +15,15 @@ import javax.annotation.Resource;
  */
 @Component("newUserEmailConfirmOn")
 public class NewUserEmailConfirmOnImpl implements NewUserEmailConfirm {
-    private static final String ACTIVE = "active";
 
     private @Resource
     UserRepository userRepository;
+    private @Resource
+    SendRegisterEmailService sendRegisterEmailService;
 
     @Override
     public void sendEmail(User user) {
-        user.setState(ACTIVE);
+        sendRegisterEmailService.send(user.email());
         userRepository.save(user);
     }
 }

@@ -27,8 +27,7 @@ public class RegisterUserUseCase {
     }
 
     public void execute(UserInput userInput) {
-        User user = userRepository.save(registerUser(userInput));
-        newUserEmailConfirmFactory.create().sendEmail(user);
+        newUserEmailConfirmFactory.create().sendEmail(userRepository.save(registerUser(userInput)));
     }
 
     private User registerUser(UserInput userInput) {
