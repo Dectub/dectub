@@ -21,14 +21,17 @@ public class SendEmailService {
     private final String username;
     private final String password;
     private final String defaultEncoding;
+    private final String personal;
     private final Properties property;
 
-    public SendEmailService(String host, String port, String username, String password, String defaultEncoding) {
+    public SendEmailService(String host, String port, String username, String password, String defaultEncoding,
+                            String personal) {
         this.host = host;
         this.port = port;
         this.username = username;
         this.password = password;
         this.defaultEncoding = defaultEncoding;
+        this.personal = personal;
         property = initProperties();
     }
 
@@ -42,7 +45,7 @@ public class SendEmailService {
 
     private void setMailInfo(MimeMessageHelper messageHelper, String to, String title, String content)
             throws Exception {
-        messageHelper.setFrom(username, "Dectub");
+        messageHelper.setFrom(username, personal);
         messageHelper.setTo(to);
         messageHelper.setSubject(title);
         messageHelper.setSentDate(new Date());

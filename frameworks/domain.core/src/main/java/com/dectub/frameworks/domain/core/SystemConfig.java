@@ -13,6 +13,11 @@ public final class SystemConfig {
     public static final String REGISTER_EMAIL_USERNAME = "register.email.username";
     public static final String REGISTER_EMAIL_PASSWORD = "register.email.password";
     public static final String REGISTER_EMAIL_DEFAULT_ENCODING = "register.email.default-encoding";
+    public static final String REGISTER_EMAIL_NAME = "register.email.name";
+    public static final String WEBSITE_NAME = "website.name";
+    public static final String REGISTER_EMAIL_TITLE = "register.email.title";
+    public static final String REGISTER_EMAIL_CONTENT_PREFIX = "register.email.content-prefix";
+    public static final String REGISTER_EMAIL_CONTENT = "register.email.content";
 
     private SystemConfig() {
     }
