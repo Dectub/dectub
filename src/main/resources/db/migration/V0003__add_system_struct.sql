@@ -1,7 +1,7 @@
 create table dectub_system
 (
     name  varchar(200) not null unique,
-    value varchar(200) not null
+    value text
 );
 
 INSERT INTO dectub_system
@@ -25,9 +25,4 @@ VALUES ('register.email.name', 'Dectub');
 INSERT INTO dectub_system
 VALUES ('register.email.title', 'Confirm your account now');
 INSERT INTO dectub_system
-VALUES ('register.email.content-prefix', '<h1>Welcome to ');
-INSERT INTO dectub_system
-VALUES ('register.email.content', '!</h1>
-<h2>Click the button below to confirm email identity.</h2>
-<h3>Warning: Please ignore this email unless you do it yourself!</h3>
-<button type=\"button\">Verify</button>');
+VALUES ('register.email.content', 'Welcome to #%website.name&%!');

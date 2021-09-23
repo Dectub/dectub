@@ -25,12 +25,8 @@ public class SendRegisterEmailServiceImpl implements SendRegisterEmailService {
 
     @Override
     public void send(String to) {
-        beanFactory.getBean(SendEmailService.class).sendEmailTo(to, getConfig(REGISTER_EMAIL_TITLE), appendContent());
-    }
-
-    private String appendContent() {
-        return getConfig(REGISTER_EMAIL_CONTENT_PREFIX).concat(getConfig(WEBSITE_NAME)
-                .concat(getConfig(REGISTER_EMAIL_CONTENT)));
+        beanFactory.getBean(SendEmailService.class).sendEmailTo(to, getConfig(REGISTER_EMAIL_TITLE),
+                getConfig(REGISTER_EMAIL_CONTENT));
     }
 
     private String getConfig(String name) {

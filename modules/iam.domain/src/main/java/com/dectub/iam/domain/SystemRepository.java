@@ -8,4 +8,5 @@ package com.dectub.iam.domain;
 public interface SystemRepository {
     String getConfig(String name);
     void save(String name, String value);
+    void remove(String test);
 }

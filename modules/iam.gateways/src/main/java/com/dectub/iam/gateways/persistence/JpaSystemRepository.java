@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface JpaSystemRepository extends Repository<JpaSystem, Long> {
     Optional<JpaSystem> findByNameEquals(String name);
     void save(JpaSystem jpaSystem);
+    boolean existsByNameEquals(String name);
+    void removeByNameEquals(String name);
 }
