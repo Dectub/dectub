@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+import static com.dectub.frameworks.domain.core.SystemConfig.REGISTER_EMAIL;
+
 /**
  * @author Created by Neil Wang
  * @version 1.0.0
@@ -20,8 +22,6 @@ public class NewUserEmailConfirmFactoryImpl implements NewUserEmailConfirmFactor
     NewUserEmailConfirm newUserEmailConfirmOff;
     private @Resource
     NewUserEmailConfirm newUserEmailConfirmOn;
-
-    private static final String REGISTER_EMAIL = "register.email";
 
     @Override
     public NewUserEmailConfirm create() {
