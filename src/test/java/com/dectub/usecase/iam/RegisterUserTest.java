@@ -3,10 +3,7 @@ package com.dectub.usecase.iam;
 import com.dectub.IntegrationTest;
 import com.dectub.TestResponse;
 import com.dectub.frameworks.domain.core.SystemConfig;
-import com.dectub.iam.domain.SecurityPasswordHandler;
-import com.dectub.iam.domain.SystemRepository;
-import com.dectub.iam.domain.User;
-import com.dectub.iam.domain.UserRepository;
+import com.dectub.iam.domain.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -27,9 +24,10 @@ public class RegisterUserTest extends IntegrationTest {
     UserRepository userRepository;
     private @Resource
     SecurityPasswordHandler handler;
-
     private @Resource
     SystemRepository systemRepository;
+    private @Resource
+    CacheRepository cacheRepository;
 
     @Test
     void should_register_user_correctly_when_no_email_config() {
@@ -62,10 +60,16 @@ public class RegisterUserTest extends IntegrationTest {
         assertThat(user.roleIds()).contains(491997312445317120L);
         assertThat(user.roleIds()).contains(491997312445317121L);
         assertThat(user.state()).isEqualTo("new");
+        String code = cacheRepository.get("register.email", "wangweili457@gmail.com");
+        assertThat(code).hasSize(18);
+        get("/account/active/" + code);
+        User user2 = userRepository.userForEmail("wangweili457@gmail.com");
+        assertThat(user2.state()).isEqualTo("active");
     }
 
     @AfterEach
     void tearDown() {
         userRepository.removeAll();
+        cacheRepository.remove("register.email", "wangweili457@gmail.com");
     }
 }

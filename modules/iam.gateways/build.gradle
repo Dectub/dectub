@@ -6,6 +6,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     implementation("org.springframework.security:spring-security-web:$springSecurityVersion")
     implementation("org.springframework.boot:spring-boot-starter-mail:$springEmailVersion")
+    implementation("org.springframework.data:spring-data-redis:$springDataRedisVersion")
+    implementation("redis.clients:jedis:$jedisVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:$springBootVersion"
     implementation("org.springframework.retry:spring-retry:1.2.5.RELEASE")

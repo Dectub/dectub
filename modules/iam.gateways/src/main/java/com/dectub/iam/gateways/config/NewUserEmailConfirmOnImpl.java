@@ -1,12 +1,11 @@
 package com.dectub.iam.gateways.config;
 
-import com.dectub.iam.domain.NewUserEmailConfirm;
-import com.dectub.iam.domain.SendRegisterEmailService;
-import com.dectub.iam.domain.User;
-import com.dectub.iam.domain.UserRepository;
+import com.dectub.frameworks.domain.core.GlobalIdentityService;
+import com.dectub.iam.domain.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author Created by Neil Wang
@@ -20,9 +19,14 @@ public class NewUserEmailConfirmOnImpl implements NewUserEmailConfirm {
     UserRepository userRepository;
     private @Resource
     SendRegisterEmailService sendRegisterEmailService;
+    private @Resource
+    CacheRepository cacheRepository;
+
+    private static final String REGISTER_EMAIL = "register.email";
 
     @Override
     public void sendEmail(User user) {
+        cacheRepository.save(REGISTER_EMAIL, Map.of(user.email(), String.valueOf(GlobalIdentityService.next())));
         sendRegisterEmailService.send(user.email());
         userRepository.save(user);
     }

@@ -16,6 +16,7 @@ public final class SystemConfig {
     public static final String REGISTER_EMAIL_NAME = "register.email.name";
 //    public static final String WEBSITE_NAME = "website.name";
     public static final String REGISTER_EMAIL_TITLE = "register.email.title";
+    public static final String REGISTER_EMAIL_CONTENT_PREFIX = "register.email.content-prefix";
     public static final String REGISTER_EMAIL_CONTENT = "register.email.content";
 
     private SystemConfig() {

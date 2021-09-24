@@ -6,3 +6,5 @@ spring:
     url: jdbc:postgresql://localhost:22040/dectub
     username: postgres
     password: 1234
+website:
+  url: http://localhost:8080

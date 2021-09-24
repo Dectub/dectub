@@ -1,5 +1,6 @@
 package com.dectub.iam.gateways.ohs;
 
+import com.dectub.iam.application.ActiveUserUseCase;
 import com.dectub.iam.application.RegisterUserUseCase;
 import com.dectub.iam.application.UserInput;
 import org.springframework.http.HttpStatus;
@@ -17,11 +18,18 @@ import javax.annotation.Resource;
 public class UserController {
     private @Resource
     RegisterUserUseCase registerUserUseCase;
+    private @Resource
+    ActiveUserUseCase activeUserUseCase;
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public void register(@RequestBody UserInput input) {
         registerUserUseCase.execute(input);
+    }
+
+    @GetMapping("/active/{code}")
+    public void active(@PathVariable String code) {
+        activeUserUseCase.execute(code);
     }
 
 }
