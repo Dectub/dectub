@@ -34,18 +34,25 @@ public class SystemRepositoryImpl implements SystemRepository {
     }
 
     private String getSubConfig(String value) {
-        if (hasSubReplacement(removeFirstPrefix(value)))
-            return value.substring(value.indexOf(REPLACE_PREFIX) + REPLACE_SUFFIX.length(),
-                    value.indexOf(REPLACE_SUFFIX));
+        if (noSubReplacement(removeFirstPrefix(value)))
+            return value.substring(beginIndex(value), value.indexOf(REPLACE_SUFFIX));
         return getSubConfig(removeFirstPrefix(value));
     }
 
-    private String removeFirstPrefix(String value) {
-        return value.substring(value.indexOf(REPLACE_PREFIX) + REPLACE_SUFFIX.length());
+    private int beginIndex(String value) {
+        return value.indexOf(REPLACE_PREFIX) + REPLACE_SUFFIX.length();
     }
 
-    private boolean hasSubReplacement(String substring1) {
-        return !containPrefix(substring1) || substring1.indexOf(REPLACE_PREFIX) > substring1.indexOf(REPLACE_SUFFIX);
+    private String removeFirstPrefix(String value) {
+        return value.substring(beginIndex(value));
+    }
+
+    private boolean noSubReplacement(String value) {
+        return !containPrefix(value) || existSubReplacement(value);
+    }
+
+    private boolean existSubReplacement(String value) {
+        return value.indexOf(REPLACE_PREFIX) > value.indexOf(REPLACE_SUFFIX);
     }
 
     private String replaceReplacement(String value, String substring) {
