@@ -1,5 +1,6 @@
 package com.dectub.iam.gateways.acl;
 
+import lombok.Generated;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -21,6 +22,8 @@ public class WithLogMailSender {
         this.log = log;
     }
 
+    // TODO: Fix @Generated
+    @Generated
     public void send(MimeMessage message) {
         try {
             javaMailSender.send(message);
