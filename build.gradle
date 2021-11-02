@@ -70,5 +70,6 @@ apply from: "./coverage.gradle"
 apply from: "$rootDir/gradle/config/scripts/jib.gradle"
 
 task initGit(type: Exec) {
+    commandLine 'sh', "echo 1"
 }
 check.dependsOn(initGit)
