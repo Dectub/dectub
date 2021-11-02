@@ -51,7 +51,8 @@ public class RegisterUserTest extends IntegrationTest {
         systemRepository.save(SystemConfig.REGISTER_EMAIL_USERNAME, "neilwangextraty@gmail.com");
         systemRepository.save(SystemConfig.REGISTER_EMAIL_PASSWORD, "pL1lAs!L_u3jJ59G|)Al");
         systemRepository.save(SystemConfig.REGISTER_EMAIL_DEFAULT_ENCODING, "UTF-8");
-        TestResponse response = post("/account/register", ImmutableMap.of("name", "test1", "email", "wangweili457@gmail.com", "roleIds", Set.of(491997312445317120L, 491997312445317121L), "password", "1234"));
+        TestResponse response = post("/account/register", ImmutableMap.of("name", "test1",
+                "email", "wangweili457@gmail.com", "roleIds", Set.of(491997312445317120L, 491997312445317121L), "password", "1234"));
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED);
         User user = userRepository.userForEmail("wangweili457@gmail.com");
         assertThat(user.name()).isEqualTo("test1");
