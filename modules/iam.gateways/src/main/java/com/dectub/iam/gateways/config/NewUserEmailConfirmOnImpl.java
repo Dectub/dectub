@@ -1,5 +1,6 @@
 package com.dectub.iam.gateways.config;
 
+import com.dectub.frameworks.domain.core.Exceptions;
 import com.dectub.frameworks.domain.core.GlobalIdentityService;
 import com.dectub.iam.domain.*;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ public class NewUserEmailConfirmOnImpl implements NewUserEmailConfirm {
     @Override
     public void sendEmail(User user) {
         cacheRepository.save(REGISTER_EMAIL, Map.of(user.email(), String.valueOf(GlobalIdentityService.next())));
-        sendRegisterEmailService.send(user.email());
+        Exceptions.execute(() -> sendRegisterEmailService.send(user.email()));
         userRepository.save(user);
     }
 }
