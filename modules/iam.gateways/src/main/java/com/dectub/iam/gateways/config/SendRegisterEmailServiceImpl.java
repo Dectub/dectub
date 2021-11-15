@@ -5,7 +5,6 @@ import com.dectub.iam.domain.SendRegisterEmailService;
 import com.dectub.iam.domain.SystemRepository;
 import com.dectub.iam.gateways.acl.GetWebsiteUrlService;
 import com.dectub.iam.gateways.acl.SendEmailService;
-import lombok.Generated;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.stereotype.Component;
 
@@ -39,16 +38,10 @@ public class SendRegisterEmailServiceImpl implements SendRegisterEmailService {
                 .concat(getConfig(REGISTER_EMAIL_CONTENT));
     }
 
-    // TODO: Fix @Generated
     @Override
-    @Generated
     public void send(String to) {
-        try {
-            beanFactory.getBean(SendEmailService.class).sendEmailTo(to, getConfig(REGISTER_EMAIL_TITLE),
-                    createContent(to));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        beanFactory.getBean(SendEmailService.class).sendEmailTo(to, getConfig(REGISTER_EMAIL_TITLE),
+                createContent(to));
     }
 
     private String getConfig(String name) {

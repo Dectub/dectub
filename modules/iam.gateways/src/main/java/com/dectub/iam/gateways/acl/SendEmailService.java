@@ -1,7 +1,6 @@
 package com.dectub.iam.gateways.acl;
 
 import com.dectub.frameworks.domain.core.Exceptions;
-import lombok.Generated;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -36,8 +35,6 @@ public class SendEmailService {
         property = initProperties();
     }
 
-    // TODO: Fix @Generated
-    @Generated
     public void sendEmailTo(String to, String title, String content) {
         JavaMailSender javaMailSender = javaMailSender();
         var mimeMessage = javaMailSender.createMimeMessage();
