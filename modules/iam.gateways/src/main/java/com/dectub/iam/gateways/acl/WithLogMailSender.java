@@ -14,18 +14,17 @@ import java.util.stream.Stream;
 
 public class WithLogMailSender {
     private final JavaMailSender javaMailSender;
-    private final Logger log;
+    private static final Logger LOGGER = Logger.getLogger(WithLogMailSender.class.toString());
 
-    public WithLogMailSender(JavaMailSender javaMailSender, Logger log) {
+    public WithLogMailSender(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
-        this.log = log;
     }
 
     public void send(MimeMessage message) {
         try {
             javaMailSender.send(message);
         } catch (MailSendException e) {
-            log.warning("Invalid mail addresses: " + invalidMailAddresses(e));
+            LOGGER.warning("Invalid mail addresses: " + invalidMailAddresses(e));
             throw e;
         }
     }

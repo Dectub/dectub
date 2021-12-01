@@ -7,7 +7,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 import java.util.Date;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 /**
  * @author Created by Neil Wang
@@ -40,7 +39,7 @@ public class SendEmailService {
         var mimeMessage = javaMailSender.createMimeMessage();
         Exceptions.execute(() -> setMailInfo(Exceptions.evaluate(() ->
                 new MimeMessageHelper(mimeMessage, true)), to, title, content));
-        new WithLogMailSender(javaMailSender, Logger.getLogger(WithLogMailSender.class.getName())).send(mimeMessage);
+        new WithLogMailSender(javaMailSender).send(mimeMessage);
     }
 
     private void setMailInfo(MimeMessageHelper messageHelper, String to, String title, String content)
